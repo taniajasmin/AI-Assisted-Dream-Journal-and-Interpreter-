@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dream Interpreter </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>The Dream Interpreter</h1>
+        <p>Record your dreams, and I'll offer some insights.</p>
+        <form method="POST" action="/">
+            <textarea name="dream_text" rows="6" placeholder="Describe your dream in detail..." required></textarea>
+            <input type="text" name="emotions" placeholder="Emotions felt during dream (e.g., scared, happy)">
+            <input type="text" name="symbols" placeholder="Key symbols or themes (e.g., water, flying)">
+            <button type="submit">Submit Dream</button>
+        </form>
+        <a href="{{ url_for('history') }}">View Dream History</a>
+        {% if entries %}
+            <h3>Most Recent Dream</h3>
+            <div class="entry">
+                <p><strong>You ({{ entries[-1]['date'] }}):</strong> {{ entries[-1]['dream_text'] }}</p>
+                <p><strong>Emotions:</strong> {{ entries[-1]['emotions'] }}</p>
+                <p><strong>Symbols/Themes:</strong> {{ entries[-1]['symbols'] }}</p>
+                <p><strong>Interpretation:</strong> {{ entries[-1]['ai_interpretation'] }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

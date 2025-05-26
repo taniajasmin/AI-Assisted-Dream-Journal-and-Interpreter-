@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Dream History</h1>
+        <a href="{{ url_for('index') }}">Back to Journal</a>
+        {% if entries %}
+            {% for entry in entries %}
+                <div class="entry">
+                    <p><strong>You ({{ entry['date'] }}):</strong> {{ entry['dream_text'] }}</p>
+                    <p><strong>Emotions:</strong> {{ entry['emotions'] }}</p>
+                    <p><strong>Symbols/Themes:</strong> {{ entry['symbols'] }}</p>
+                    <p><strong>Interpretation:</strong> {{ entry['ai_interpretation'] }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No dream entries yet. Start recording your dreams!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
